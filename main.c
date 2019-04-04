@@ -24,4 +24,5 @@ int i;
     }
 printf("The maximum value was %f, found at index %d", maximum, maxindex);
 printf("The maximum value was %f, found at index %d", maximum, maxindex);
+printf("The maximum value was %f, found at index %d", maximum, maxindex);
 }
