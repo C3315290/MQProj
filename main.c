@@ -6,23 +6,12 @@
 int main()
 {
 
-
-float data[] = {1.2, 8.4, 10.8, -0.4, -8.234, 3.1};
-float maximum = -1e30;
-int maxindex;
+float letters[26]
+float lettercip[26]
 int i;
 
-    for (i = 0; i < 6; i++) {
-        
-        if (data[i] > maximum) {
-        maximum = data[i];
-        maxindex = i;
-    
-        }
-        
-        
+    for (i = 1; i < 26; i++) {
+        printf("%f", letters[i])
+        }        
     }
-printf("The maximum value was %f, found at index %d", maximum, maxindex);
-printf("The maximum value was %f, found at index %d", maximum, maxindex);
-printf("The maximum value was %f, found at index %d", maximum, maxindex);
 }
