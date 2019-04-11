@@ -3,16 +3,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void move(char *str, int N);
+
 int strlen(char *str);
+void move(char *str, int N);
 
 int main()
 {
     
 char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
-
+char longest[1500];
 int i = 0;
 
+FILE *input;
+FILE *output;
+
+input = fopen("words.txt", "r");
+output = fopen("ciph.txt", "w");
+
+fprintf(output, "%s", str);
 
 while (i < 26) {
     move(str, strlen(str));
@@ -34,7 +42,7 @@ int i = 0; // Array index loop counter
             }
     }
 }
-return; // Optional
+return;
 }
 
 int strlen(char *str) {
@@ -45,4 +53,3 @@ int strlen(char *str) {
  }
      return i;
     }
-
