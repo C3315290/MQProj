@@ -15,7 +15,7 @@ char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoh
 int i = 0;
 char word3[10];
 
-returnword(str, word3, 2, len(str));
+returnword(str, word3, 4, len(str));
 
 printf("%s\n", word3);
 
@@ -30,8 +30,9 @@ fprintf(output, "%s", str);
 
 //prints all permutations
 while (i < 26) {
-    move(str, len(str));
-    printf("%d: %s\n",i, str);
+    move(word3, len(word3));
+    printf("%d: %s\n",i, word3);
+    
     i++;
 }          
 
@@ -63,6 +64,7 @@ int len(char *str) { //function finds length of string
 void returnword(char *str, char *word, int n, int N) 
 {
     int count = 0;
+    int count2 = 0;
      //   int count2 = 0;
 int spaces = 0;
     if (n == 1)
@@ -80,11 +82,15 @@ int spaces = 0;
     
    if (n > 1) {
        while (count < N) {
-            while (spaces >= 1 && spaces < 2 && count < N) {
-            word[count] = str[count]; 
+            while (spaces >= n-1 && spaces < n && count < N) {
+            word[count2] = str[count]; 
             count++;
+            count2++;
                     if (str[count] == ' ') {
                     spaces++;
+                    if (spaces == n + 1) {
+                            word[count2 + 1] = '\0';
+                    }
                 }
             }
                 if (str[count] == ' ') {
