@@ -7,40 +7,61 @@
 int len(char *str);
 void move(char *str, int N);
 void returnword(char *str, char *word, int wordnumber, int N);
-void init(char *word);
+void init(char *word);  //sets entire word string to '\0' ensures when function returnword is run, only a word returns.
 
 int main()
 {
     
-char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
+char str[] = "dpaopu aol alea vm tvza whnlz, aolyl hyl bzbhssf h shynl ubtily vm ofwlyalea spurz av vaoly whnlz dpaopu aol dprp. aopz mvyt vm uvu-spulhy uhcpnhapvu";
 int i = 0;
+int k = 0;
 char word[100];
+char find[1000];
+int cipherresult = 0;
 
 init(word);
+init(find);
 
-returnword(str, word, 5, len(str));
+returnword(str, word, 1, len(str));
 
 printf("%s\n", word);
 
 
-//FILE *input;
-FILE *output;
+printf("Encrypted: %s\n", str);
 
-//input = fopen("words.txt", "r");
-output = fopen("ciph.txt", "w");
+FILE *input;
+input = fopen("words.txt", "r");
 
-fprintf(output, "%s", str);
 
+   
 //prints all permutations
 while (i < 26) {
     move(word, len(word));
-  //  printf("%d: %s\n",i, word3);
+    printf("%s\n", word);
 
+rewind(input);
+while(fscanf(input, "%s", find) != EOF)
+{
+	if(strcmp(find, word) == 0)
+	{
+		//printf("Found\n");
+		//printf("%d\n", i);
+		cipherresult = i;
+	}
+}
     i++;
-}          
+}
 
-  
+while (k < 26) {
+    move(str, len(str));
+    if (k == cipherresult) {
+        printf("Decrypted: %s\n", str);
     }
+     k++;
+}
+
+    
+}
 // ------------------------------FUNCTIONS--------------------------------------------
 void move(char *str, int N) {
 int i = 0; // Array index loop counter
