@@ -7,32 +7,35 @@
 int len(char *str);
 void move(char *str, int N);
 void returnword(char *str, char *word, int wordnumber, int N);
+void init(char *word);
 
 int main()
 {
     
 char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
 int i = 0;
-char word3[10];
+char word[100];
 
-returnword(str, word3, 4, len(str));
+init(word);
 
-printf("%s\n", word3);
+returnword(str, word, 5, len(str));
+
+printf("%s\n", word);
 
 
-// FILE *input;
+//FILE *input;
 FILE *output;
 
-// input = fopen("words.txt", "r");
+//input = fopen("words.txt", "r");
 output = fopen("ciph.txt", "w");
 
 fprintf(output, "%s", str);
 
 //prints all permutations
 while (i < 26) {
-    move(word3, len(word3));
-    printf("%d: %s\n",i, word3);
-    
+    move(word, len(word));
+  //  printf("%d: %s\n",i, word3);
+
     i++;
 }          
 
@@ -75,7 +78,8 @@ int spaces = 0;
         count++;
         }
     word[count] = '\0';
-    }
+    word[count + 1] = '\0';
+   }
     
     
     
@@ -88,7 +92,7 @@ int spaces = 0;
             count2++;
                     if (str[count] == ' ') {
                     spaces++;
-                    if (spaces == n + 1) {
+                    if (spaces == n - 1) {
                             word[count2 + 1] = '\0';
                     }
                 }
@@ -98,6 +102,15 @@ int spaces = 0;
                 }
             count++;
             }
-
     }
+    return;
 }
+
+void init(char *word) {
+    int i = 0; // Array index loop counter
+
+    while (word[i] != '\0') {
+                word[i] = '\0';
+                i++;
+                }
+    }
