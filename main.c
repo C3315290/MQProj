@@ -12,7 +12,7 @@ void init(char *word);  //sets entire word string to '\0' ensures when function 
 int main()
 {
     
-char str[] = "dpaopu aol alea vm tvza whnlz, aolyl hyl bzbhssf h shynl ubtily vm ofwlyalea spurz av vaoly whnlz dpaopu aol dprp. aopz mvyt vm uvu-spulhy uhcpnhapvu";
+char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
 int i = 0;
 int k = 0;
 char word[100];
@@ -22,7 +22,7 @@ int cipherresult = 0;
 init(word);
 init(find);
 
-returnword(str, word, 1, len(str));
+returnword(str, word, 4, len(str));
 
 printf("%s\n", word);
 
@@ -44,23 +44,20 @@ while(fscanf(input, "%s", find) != EOF)
 {
 	if(strcmp(find, word) == 0)
 	{
-		//printf("Found\n");
-		//printf("%d\n", i);
+		printf("Found\n");
+		printf("%d\n", i);
 		cipherresult = i;
 	}
 }
     i++;
 }
-
 while (k < 26) {
     move(str, len(str));
     if (k == cipherresult) {
         printf("Decrypted: %s\n", str);
     }
      k++;
-}
-
-    
+}    
 }
 // ------------------------------FUNCTIONS--------------------------------------------
 void move(char *str, int N) {
@@ -102,9 +99,6 @@ int spaces = 0;
     word[count + 1] = '\0';
    }
     
-    
-    
-    
    if (n > 1) {
        while (count < N) {
             while (spaces >= n-1 && spaces < n && count < N) {
@@ -113,14 +107,15 @@ int spaces = 0;
             count2++;
                     if (str[count] == ' ') {
                     spaces++;
-                    if (spaces == n - 1) {
-                            word[count2 + 1] = '\0';
+                    if (spaces == n) {
+                           word[count2] = '\0';
                     }
                 }
             }
                 if (str[count] == ' ') {
                     spaces++;
                 }
+
             count++;
             }
     }
