@@ -8,6 +8,7 @@ int len(char *str);
 void move(char *str, int N);
 void returnword(char *str, char *word, int wordnumber, int N);
 void init(char *word);  //sets entire word string to '\0' ensures when function returnword is run, only a word returns.
+int nowords(char *str, int N);
 
 int main()
 {
@@ -22,10 +23,13 @@ int cipherresult = 0;
 init(word);
 init(find);
 
-returnword(str, word, 4, len(str));
+returnword(str, word, 7, len(str));
+
+
 
 printf("%s\n", word);
 
+printf("%d\n", nowords(str,len(str)));
 
 printf("Encrypted: %s\n", str);
 
@@ -129,4 +133,17 @@ void init(char *word) {
                 word[i] = '\0';
                 i++;
                 }
+    }
+    
+    
+    int nowords(char *str, int N) {
+        int j = 0;
+        int words = 0;
+        for (j = 0; j < N; j++) {
+        if (str[j] == ' ') {
+        words++;   
+                    ;
+        }
+}
+        return words + 1;
     }
