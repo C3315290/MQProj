@@ -4,65 +4,70 @@
 #include <stdlib.h>
 #include <string.h>
 
-int len(char *str);
 void move(char *str, int N);
 void returnword(char *str, char *word, int wordnumber, int N);
 void init(char *word);  //sets entire word string to '\0' ensures when function returnword is run, only a word returns.
 int nowords(char *str, int N);
+int containspecial(;
+
 
 int main()
 {
     
-char str[] = "pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
+char str[] = "pc tktg-vgdlxcv cjbqtg du rdbeatm pcs gxvxs gjath eajh wpgs-id-rdet-lxiw gtvjapixdch pgt cdl qtxcv atvxhapits ugdb hipit id hipit. ztn utstgpa gtvjapixdch ltgt udgbjapits qn iwt usp, uir, pcs iwt rehr. tprw du iwtht utstgpa pvtcrxth htgkth p hetrxuxr bxhhxdc. dct tmpbeat: aplh hedchdgts qn iwt duuxrt du iwt upxg stqi rdaatrixdc egprixrth egtktci pc pvtcrn ugdb ejgedhtujaan wpgphhxcv raxtcih xc htgxdjh stqi. iwt upxg eprzpvxcv pcs apqtaxcv pri bpzth rtgipxc iwpi egditrixdc ugdb bxhatpsxcv eprzpvxcv du vddsh xh vjpgpcitts id tprw qjntg du vddsh rpggxts xc hbpaa hwdeh ph ltaa ph xc apgvt hjetgbpgztih. egdsjrih dc iwt bpgzti bjhi gtktpa iwt cpbth du paa xcvgtsxtcih dc iwt apqta. apcvjpvt bjhi qt xc ratpg pcs egtrxht itgbh iwpi rpc qt jcstghidds qn tktgndct. iwxh egprixrt xh ktgn rgjrxpa udg iwt axkth du bpcn etdeat. xi xh egjstci iwpi lt gtrpaa iwpi iwt usp hetrxuxrpaan gtfjxgth iwpi paa vddsh pgt ejgt, hput, pcs lwdathdbt. iwt usp hipith iwpi paa vddsh qt egdsjrts jcstg wxvwan hpcxipgn rdcsxixdch. sgjvh bjhi qt rdbeatitan hput pcs bjhi pahd qt tuutrixkt udg iwtxg hipits ejgedht. iwxh edaxrn peeaxth id rdhbtixrh iwpi bjhi qt qdiw hput pcs ejgt. xcsxkxsjpah pgt duitc idipaan jcpeegtrxpixkt du iwt usp'h vgtpi stsxrpixdc.";
 int i = 0;
 int k = 0;
+int l = 1;
+int largestwordpos = 1;
+int largestwordlength = 1;
 char word[100];
 char find[1000];
 int cipherresult = 0;
 
+
 init(word);
 init(find);
-
-returnword(str, word, 7, len(str));
-
-
-
-printf("%s\n", word);
-
-printf("%d\n", nowords(str,len(str)));
-
-printf("Encrypted: %s\n", str);
 
 FILE *input;
 input = fopen("words.txt", "r");
 
+while (l <= nowords(str, strlen(str))) {
+    returnword(str, word, l, strlen(str));
+    
+    if (strlen(word) > largestwordlength) {
+        largestwordpos = l;    
+    }
 
-   
-//prints all permutations
+l++;
+}
+
+returnword(str, word, largestwordpos, strlen(str));
+
 while (i < 26) {
-    move(word, len(word));
-    printf("%s\n", word);
-
+    move(word, strlen(word));
 rewind(input);
 while(fscanf(input, "%s", find) != EOF)
 {
 	if(strcmp(find, word) == 0)
 	{
-		printf("Found\n");
-		printf("%d\n", i);
 		cipherresult = i;
 	}
 }
     i++;
 }
+
+printf("Results: %d\n", cipherresult);
+
 while (k < 26) {
-    move(str, len(str));
+    move(str, strlen(str));
     if (k == cipherresult) {
         printf("Decrypted: %s\n", str);
     }
      k++;
-}    
 }
+
+}
+
 // ------------------------------FUNCTIONS--------------------------------------------
 void move(char *str, int N) {
 int i = 0; // Array index loop counter
@@ -78,19 +83,11 @@ int i = 0; // Array index loop counter
 }
 return;
 }
-int len(char *str) { //function finds length of string
-    int i = 0;
-    while (str[i] != 0) {
-     i++;
- }
-     return i;
-    }
     
 void returnword(char *str, char *word, int n, int N) 
 {
     int count = 0;
     int count2 = 0;
-     //   int count2 = 0;
 int spaces = 0;
     if (n == 1)
    {
@@ -127,15 +124,13 @@ int spaces = 0;
 }
 
 void init(char *word) {
-    int i = 0; // Array index loop counter
+    int i = 0;
 
     while (word[i] != '\0') {
                 word[i] = '\0';
                 i++;
                 }
-    }
-    
-    
+    }  
     int nowords(char *str, int N) {
         int j = 0;
         int words = 0;
