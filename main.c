@@ -8,7 +8,7 @@ void move(char *str, int N);
 void returnword(char *str, char *word, int wordnumber, int N);
 void init(char *word);  //sets entire word string to '\0' ensures when function returnword is run, only a word returns.
 int nowords(char *str, int N);
-int containspecial(;
+int containspunc(char *word, int K);
 
 
 int main()
@@ -34,7 +34,9 @@ input = fopen("words.txt", "r");
 while (l <= nowords(str, strlen(str))) {
     returnword(str, word, l, strlen(str));
     
-    if (strlen(word) > largestwordlength) {
+
+    if (strlen(word) > largestwordlength && containspunc(word, strlen(word)) == 0) {
+        largestwordlength = strlen(word);
         largestwordpos = l;    
     }
 
@@ -42,6 +44,8 @@ l++;
 }
 
 returnword(str, word, largestwordpos, strlen(str));
+printf("Word used for spell checking: %s\n", word);
+
 
 while (i < 26) {
     move(word, strlen(word));
@@ -51,12 +55,12 @@ while(fscanf(input, "%s", find) != EOF)
 	if(strcmp(find, word) == 0)
 	{
 		cipherresult = i;
+		printf("Word Found: %s\n", find);
 	}
 }
     i++;
 }
-
-printf("Results: %d\n", cipherresult);
+printf("Cipher Movement: %d\n", cipherresult);
 
 while (k < 26) {
     move(str, strlen(str));
@@ -88,7 +92,7 @@ void returnword(char *str, char *word, int n, int N)
 {
     int count = 0;
     int count2 = 0;
-int spaces = 0;
+    int spaces = 0;
     if (n == 1)
    {
         while (str[count] != ' ') 
@@ -142,3 +146,23 @@ void init(char *word) {
 }
         return words + 1;
     }
+    
+    
+    int containspunc(char *word, int K) {
+        int j = 0;
+        int r = 0;
+        while (j <= K) {
+
+                    if ((word[j] >= 33 && word[j] <= 64) || (word[j] >= 91 && word[j] <= 96) || (word[j] >= 123 && word[j] <= 126)) {
+                    r = 1;
+                    }
+        j++;
+        }
+        return r;
+    }
+
+
+
+
+                    
+                    
