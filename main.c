@@ -14,6 +14,7 @@ int containspunc(char *word, int K);
 void initfind(char *find);
 void upperstr(char *str);
 void upperenstr(char *encyptstr);
+void encryptsub(char *alphabet, char *subkey, char *ensub, char *str);
 
 
 int main()
@@ -32,12 +33,17 @@ char find[1000];
 int cipherresult = 0;
 int ciphermove;
 char c;
+char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+char subkey[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
+char ensub[100000];
+
 
 
 printf("Please select an option: \n");
 printf("a) Encrypt ceaser cypher, place test to be encrypted in Cipher.txt, enter a key.\n");
 printf("b) Decrypt ceaser cypher without key\n");
 printf("c) Decrypt ceaser cypher given Key\n");
+printf("d) Substitutiobn with key provided\n");
 printf("Selection: ");
 scanf("%c", &c);
 
@@ -46,8 +52,10 @@ initfind(find);
 
 FILE *dict;
 dict = fopen("words.txt", "r");
-FILE *output;
-output = fopen("decrypted.txt", "w");
+FILE *doutput;
+doutput = fopen("decrypted.txt", "w");
+FILE *eoutput;
+eoutput = fopen("encrypted.txt", "w");
 FILE *encryptf;
 encryptf = fopen("cipherencrypt.txt", "r");
 FILE *decryptf;
@@ -66,7 +74,8 @@ rewind(encryptf) ;
                 o++;
             }     
         }
-printf("Encrypted text with movement of %d: %s\n", ciphermove, encyptstr);  
+printf("Encrypted text with movement of %d: %s\n", ciphermove, encyptstr); 
+        fprintf(eoutput, "%s", encyptstr); 
 break;
 
 case 'b':
@@ -102,7 +111,7 @@ while (k < 26) {
     demove(str, strlen(str));
     if (k == cipherresult) {
         printf("Decrypted: %s\n", str);
-        fprintf(output, "%s", str);
+        fprintf(doutput, "%s", str);
     }
     k++;
 }
@@ -118,11 +127,25 @@ while(fscanf(decryptf, "%[^\n]", str) != EOF){
         demove(str, strlen(str));
         if (k == abs(ciphermove - 26)) {
             printf("Decrypted: %s\n", str);
-            fprintf(output, "%s", str);
+            fprintf(doutput, "%s", str);
         }
         k++;
     }
 }
+
+case 'd': //
+
+//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+
+
+while(fscanf(encryptf, "%[^\n]", str) != EOF){
+    upperenstr(str);
+    encryptsub(alphabet, subkey, ensub, str);
+}
+
+printf("Encrypted: %s\n", ensub);
 
 break;
 default: printf("Unknown option %c\nPlease enter a or b\n",c);
@@ -251,4 +274,21 @@ int containspunc(char *word, int K) {
     }
 return r;
 }
-           
+     
+//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
+     
+void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
+    int n = 0;
+    int m = 0;
+    for (m = 1; m < strlen(str); m++) { 
+        if (str[m] != 32 && str[m] >= 65 && str[m] <= 90) {
+            
+            for (n = 1; n < strlen(alphabet); n++) {
+                if (str[m] == alphabet[n]) {
+                      ensub[m] = subkey[n];
+                }
+            }
+        }
+    }
+}
