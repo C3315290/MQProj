@@ -180,7 +180,7 @@ while(fscanf(subdecryptf, "%[^\n]", str) != EOF){
 }
 
 printf("Decrypted: %s\n", desub);
-fprintf(subdecrypted, "%s", ensub);
+fprintf(subdecrypted, "%s", desub);
 
 break;
 
@@ -311,6 +311,12 @@ int containspunc(char *word, int K) {
 return r;
 }
      
+/*
+This function accepts strings alphabet, subkey, desub and str and compares characters in str, subkey and alphabet
+and in turn encrypts the result into string ensub.
+
+*/
+     
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     int n = 0;
     int m = 0;
@@ -329,19 +335,25 @@ void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     }
 }
 
+
+/*
+This function accepts strings alphabet, subkey, desub and str and compares characters in str, subkey and alphabet
+and in turn decrypts the result into string desub.
+
+*/
 void decryptsub(char *alphabet, char *subkey, char *desub, char *str) {
     int n = 0;
     int m = 0;
     int found = 0;
-    for (m = 0; m < strlen(str); m++) {
-        found = 0;
-            for (n = 0; n <= 26; n++) {
+    for (m = 0; m < strlen(str); m++) { //loops through str for its entire length to perform the next loop on each character
+        found = 0; // found is used for deducing special characters and spaces. reset to 0 so it may be used again.
+            for (n = 0; n <= 26; n++) { //loops through each charater in str, checking which postion it matches in subkey and then replaces with same position in alphabet string. 
                 if (str[m] == subkey[n]) {
                       desub[m] = alphabet[n];
-                      found = 1;
+                      found = 1; //set to 1 if character was found.
                 }
             }
-        if (found == 0) {
+        if (found == 0) { //if letter not found in subkey it is assumed characters is special. does not need to be decrypted
         desub[m] = str[m];
         }
     }
