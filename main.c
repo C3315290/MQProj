@@ -56,24 +56,50 @@ initfind(find);
 
 FILE *dict;
 dict = fopen("words.txt", "r"); // this file contains words to be used for spell checking.
-
+if (dict == NULL) {
+    perror("Can't open file");//return error if not file
+}
 
 FILE *subdecrypted;
 subdecrypted = fopen("subdecrypted.txt", "w"); // open file for writing - decrypted substitution ciphers go here.
+if (subdecrypted == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *subencrypted;
 subencrypted = fopen("subencrypted.txt", "w"); // open file for writing - encrypted substitution ciphers go here.
+if (subencrypted == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *rotdecrypted;
 rotdecrypted = fopen("rotdecrypted.txt", "w"); // open file for writing - decrypted rotation ciphers go here.
+if (rotdecrypted == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *rotencrypted;
 rotencrypted = fopen("rotencrypted.txt", "w"); // open file for writing - encrypted rotation ciphers go here.
+if (rotencrypted == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *rotencryptf;
 rotencryptf = fopen("rotcipherencrypt.txt", "r"); // open file for reading - rotation ciphers to be encrypted go here.
+if (rotencryptf == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *rotdecryptf;
 rotdecryptf  = fopen("rotcipherdecrypt.txt", "r"); // open file for reading - rotation ciphers to be decrypted go here.
+if (rotdecryptf == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *subencryptf;
 subencryptf = fopen("subcipherencrypt.txt", "r");  // open file for reading - substitution ciphers to be encrypted go here.
+if (subencryptf == NULL) {
+    perror("Can't open file");//return error if not file
+}
 FILE *subdecryptf;
 subdecryptf  = fopen("subcipherdecrypt.txt", "r"); // open file for reading - substitution ciphers to be decrypted go here.
+if (subdecryptf == NULL) {
+    perror("Can't open file"); //return error if not file
+}
 
 switch (c) {      
     case 'a': //a) Encrypt ceaser cypher, enter a key
