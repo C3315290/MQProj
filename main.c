@@ -55,10 +55,21 @@ initfind(find);
 
 FILE *dict;
 dict = fopen("words.txt", "r");
-FILE *doutput;
-doutput = fopen("decrypted.txt", "w");
-FILE *eoutput;
-eoutput = fopen("encrypted.txt", "w");
+
+
+FILE *subdecrypted;
+subdecrypted = fopen("subdecrypted.txt", "w");
+
+FILE *subencrypted;
+subencrypted = fopen("subencrypted.txt", "w");
+
+FILE *rotdecrypted;
+rotdecrypted = fopen("rotdecrypted.txt", "w");
+
+FILE *rotencrypted;
+rotencrypted = fopen("rotencrypted.txt", "w");
+
+
 FILE *rotencryptf;
 rotencryptf = fopen("rotcipherencrypt.txt", "r");
 FILE *rotdecryptf;
@@ -85,7 +96,7 @@ rewind(rotencryptf) ;
             }     
         }
 printf("Encrypted text with movement of %d: %s\n", ciphermove, encyptstr); 
-        fprintf(eoutput, "%s", encyptstr); 
+        fprintf(rotencrypted, "%s", encyptstr); 
 break;
 
 case 'b':
@@ -121,7 +132,7 @@ while (k < 26) {
     demove(str, strlen(str));
     if (k == cipherresult) {
         printf("Decrypted: %s\n", str);
-        fprintf(doutput, "%s", str);
+        fprintf(rotdecrypted, "%s", str);
     }
     k++;
 }
@@ -137,7 +148,7 @@ while(fscanf(rotdecryptf, "%[^\n]", str) != EOF){
         demove(str, strlen(str));
         if (k == abs(ciphermove - 26)) {
             printf("Decrypted: %s\n", str);
-            fprintf(doutput, "%s", str);
+            fprintf(rotdecrypted, "%s", str);
         }
         k++;
     }
@@ -145,7 +156,7 @@ while(fscanf(rotdecryptf, "%[^\n]", str) != EOF){
 
 case 'd': //
 
-printf("Eneter substitution key (Eg QWERTYUIOPASDFGHJKLZXCVBNM): %s\n", ensub);
+printf("Enter substitution key (Eg QWERTYUIOPASDFGHJKLZXCVBNM): %s\n", ensub);
 scanf("%s", subkey);
 
 while(fscanf(subencryptf, "%[^\n]", str) != EOF){
@@ -154,6 +165,7 @@ while(fscanf(subencryptf, "%[^\n]", str) != EOF){
 }
 
 printf("Encrypted: %s\n", ensub);
+fprintf(subencrypted, "%s", ensub);
 
 break;
 
@@ -168,6 +180,7 @@ while(fscanf(subdecryptf, "%[^\n]", str) != EOF){
 }
 
 printf("Decrypted: %s\n", desub);
+fprintf(subdecrypted, "%s", ensub);
 
 break;
 
