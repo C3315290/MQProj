@@ -261,16 +261,17 @@ void initword(char *word) {
         word[i] = '\0';
         i++;
     }
-}      
-    
+} 
+
+//This function converts all characters to uppercase in string 'encyptstr'
 void upperenstr(char *encyptstr) {
     int i = 0;
-    while (encyptstr[i] != '\0') {
-        encyptstr[i] = (toupper(encyptstr[i]));
+    while (encyptstr[i] != '\0') { 
+        encyptstr[i] = (toupper(encyptstr[i])); 
         i++;
     }
 }  
-
+//This function converts all charaters to uppercase in string 'str'
 void upperstr(char *str) {
     int i = 0;
     while (str[i] != '\0') {
@@ -287,6 +288,8 @@ void initfind(char *find) {
     }
 }
   
+  
+//this function counts how many words are in string 'str', this is used to later find the largest word in the same string.
 int nowords(char *str, int N) {
     int j = 0;
     int words = 0;
@@ -295,10 +298,10 @@ int nowords(char *str, int N) {
             words++;   
         }
     }
-return words + 1;
+return words + 1; //+1 counts the first word in string.
 }
     
-    
+//this function identifies whether there are any punctuation present in string 'word', return 1 or 0, 1 indicating punctuation present.
 int containspunc(char *word, int K) {
     int j = 0;
     int r = 0;
@@ -315,8 +318,7 @@ return r;
 This function accepts strings alphabet, subkey, desub and str and compares characters in str, subkey and alphabet
 and in turn encrypts the result into string ensub.
 
-*/
-     
+*/   
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     int n = 0;
     int m = 0;
@@ -335,12 +337,11 @@ void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     }
 }
 
-
 /*
 This function accepts strings alphabet, subkey, desub and str and compares characters in str, subkey and alphabet
 and in turn decrypts the result into string desub.
-
 */
+
 void decryptsub(char *alphabet, char *subkey, char *desub, char *str) {
     int n = 0;
     int m = 0;
