@@ -15,6 +15,7 @@ void initfind(char *find);
 void upperstr(char *str);
 void upperenstr(char *encyptstr);
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str);
+void decryptsub(char *alphabet, char *subkey, char *desub, char *str);
 
 
 int main()
@@ -34,8 +35,9 @@ int cipherresult = 0;
 int ciphermove;
 char c;
 char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-char subkey[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
+char subkey[26];
 char ensub[100000];
+char desub[100000];
 
 
 
@@ -43,7 +45,8 @@ printf("Please select an option: \n");
 printf("a) Encrypt ceaser cypher, place test to be encrypted in Cipher.txt, enter a key.\n");
 printf("b) Decrypt ceaser cypher without key\n");
 printf("c) Decrypt ceaser cypher given Key\n");
-printf("d) Substitutiobn with key provided\n");
+printf("d) Encrypt Substitution with key provided\n");
+printf("e) Decrypt Substitution with key provided\n");
 printf("Selection: ");
 scanf("%c", &c);
 
@@ -56,18 +59,25 @@ FILE *doutput;
 doutput = fopen("decrypted.txt", "w");
 FILE *eoutput;
 eoutput = fopen("encrypted.txt", "w");
-FILE *encryptf;
-encryptf = fopen("cipherencrypt.txt", "r");
-FILE *decryptf;
-decryptf  = fopen("cipherdecrypt.txt", "r");
+FILE *rotencryptf;
+rotencryptf = fopen("rotcipherencrypt.txt", "r");
+FILE *rotdecryptf;
+rotdecryptf  = fopen("rotcipherdecrypt.txt", "r");
+FILE *subencryptf;
+subencryptf = fopen("subcipherencrypt.txt", "r");
+FILE *subdecryptf;
+subdecryptf  = fopen("subcipherdecrypt.txt", "r");
+
+
+
 
 switch (c) {
  
 case 'a':
 printf("Enter Cypher Movement Integer:");
 scanf("%d", &ciphermove);
-rewind(encryptf) ;
-        while(fscanf(encryptf, "%[^\n]", encyptstr) != EOF){
+rewind(rotencryptf) ;
+        while(fscanf(rotencryptf, "%[^\n]", encyptstr) != EOF){
             upperenstr(encyptstr);
             while (o <= ciphermove) {
                 enmove(encyptstr, strlen(encyptstr)); 
@@ -80,7 +90,7 @@ break;
 
 case 'b':
 
-while(fscanf(decryptf, "%[^\n]", str) != EOF){
+while(fscanf(rotdecryptf, "%[^\n]", str) != EOF){
     upperenstr(str);
     while (l <= nowords(str, strlen(str))) {
         returnword(str, word, l, strlen(str));
@@ -121,7 +131,7 @@ case 'c':
 printf("Enter Cypher Movement Integer:");
 scanf("%d", &ciphermove);
 
-while(fscanf(decryptf, "%[^\n]", str) != EOF){
+while(fscanf(rotdecryptf, "%[^\n]", str) != EOF){
     upperenstr(str);
     while (k < 26) {
         demove(str, strlen(str));
@@ -135,12 +145,10 @@ while(fscanf(decryptf, "%[^\n]", str) != EOF){
 
 case 'd': //
 
-//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
+printf("Eneter substitution key (Eg QWERTYUIOPASDFGHJKLZXCVBNM): %s\n", ensub);
+scanf("%s", subkey);
 
-
-
-while(fscanf(encryptf, "%[^\n]", str) != EOF){
+while(fscanf(subencryptf, "%[^\n]", str) != EOF){
     upperenstr(str);
     encryptsub(alphabet, subkey, ensub, str);
 }
@@ -148,6 +156,21 @@ while(fscanf(encryptf, "%[^\n]", str) != EOF){
 printf("Encrypted: %s\n", ensub);
 
 break;
+
+case 'e':
+
+printf("Eneter substitution key (Eg QWERTYUIOPASDFGHJKLZXCVBNM): %s\n", ensub);
+scanf("%s", subkey);
+
+while(fscanf(subdecryptf, "%[^\n]", str) != EOF){
+    upperenstr(str);
+    decryptsub(alphabet, subkey, desub, str);
+}
+
+printf("Decrypted: %s\n", desub);
+
+break;
+
 default: printf("Unknown option %c\nPlease enter a or b\n",c);
 }
 }
@@ -281,14 +304,39 @@ return r;
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     int n = 0;
     int m = 0;
-    for (m = 1; m < strlen(str); m++) { 
-        if (str[m] != 32 && str[m] >= 65 && str[m] <= 90) {
-            
-            for (n = 1; n < strlen(alphabet); n++) {
+    int found = 0;
+    for (m = 0; m < strlen(str); m++) {
+        found = 0;
+            for (n = 0; n <= 26; n++) {
                 if (str[m] == alphabet[n]) {
                       ensub[m] = subkey[n];
-                }
+                      found = 1;
+                    }
             }
+                if (found == 0) {
+                ensub[m] = str[m];
         }
-    }
+}
+}
+
+//HSTQLT UTZ DOSA QZ ZIT LIGHL
+//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
+
+void decryptsub(char *alphabet, char *subkey, char *desub, char *str) {
+    int n = 0;
+    int m = 0;
+    int found = 0;
+    for (m = 0; m < strlen(str); m++) {
+        found = 0;
+            for (n = 0; n <= 26; n++) {
+                if (str[m] == subkey[n]) {
+                      desub[m] = alphabet[n];
+                      found = 1;
+                    }
+            }
+                if (found == 0) {
+                desub[m] = str[m];
+        }
+}
 }
