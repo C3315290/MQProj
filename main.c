@@ -298,9 +298,6 @@ int containspunc(char *word, int K) {
 return r;
 }
      
-//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
-     
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
     int n = 0;
     int m = 0;
@@ -311,17 +308,13 @@ void encryptsub(char *alphabet, char *subkey, char *ensub, char *str) {
                 if (str[m] == alphabet[n]) {
                       ensub[m] = subkey[n];
                       found = 1;
-                    }
+                }
             }
-                if (found == 0) {
-                ensub[m] = str[m];
+        if (found == 0) {
+        ensub[m] = str[m];
         }
+    }
 }
-}
-
-//HSTQLT UTZ DOSA QZ ZIT LIGHL
-//char Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//char subkey = "QWERTYUIOPASDFGHJKLZXCVBNM";
 
 void decryptsub(char *alphabet, char *subkey, char *desub, char *str) {
     int n = 0;
@@ -333,10 +326,10 @@ void decryptsub(char *alphabet, char *subkey, char *desub, char *str) {
                 if (str[m] == subkey[n]) {
                       desub[m] = alphabet[n];
                       found = 1;
-                    }
+                }
             }
-                if (found == 0) {
-                desub[m] = str[m];
+        if (found == 0) {
+        desub[m] = str[m];
         }
-}
+    }
 }
