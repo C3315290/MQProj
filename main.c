@@ -12,6 +12,8 @@ void initword(char *word);
 int nowords(char *str, int N);
 int containspunc(char *word, int K);
 void initfind(char *find);
+void initendsub(char *ensub);
+void initdesub(char *desub);
 void upperstr(char *str);
 void upperenstr(char *encryptstr);
 void encryptsub(char *alphabet, char *subkey, char *ensub, char *str);
@@ -283,6 +285,31 @@ void initword(char *word) {
         i++;
     }
 } 
+//initialises string 'ensub' with \0 characters, ensures when writing to string that '\0' is definitely present to ensure no garbage data is used
+void initendsub(char *ensub){
+      int i = 0;
+    while (ensub[i] != '\0') {
+        ensub[i] = '\0';
+        i++;
+    }  
+}
+//initialises string 'desub' with \0 characters, ensures when writing to string that '\0' is definitely present to ensure no garbage data is used
+void initdesub(char *desub){
+    int i = 0;
+    while (desub[i] != '\0') {
+        desub[i] = '\0';
+        i++;
+    }  
+}
+
+//initialises string 'find' with \0 characters, ensures when writing to string that '\0' is definitely present to ensure no garbage data is used
+void initfind(char *find) {
+    int i = 0;
+    while (find[i] != '\0') {
+        find[i] = '\0';
+        i++;
+    }
+}
 
 //This function converts all characters to uppercase in string 'encryptstr'
 void upperenstr(char *encryptstr) {
@@ -300,16 +327,6 @@ void upperstr(char *str) {
         i++;
     }
 }  
-
-//initialises string 'find' with \0 characters, ensures when writing to string that '\0' is definitely present to ensure no garbage data is used
-void initfind(char *find) {
-    int i = 0;
-    while (find[i] != '\0') {
-        find[i] = '\0';
-        i++;
-    }
-}
-  
   
 //this function counts how many words are in string 'str' using the amount of spaces present in string.
 int nowords(char *str, int N) {
