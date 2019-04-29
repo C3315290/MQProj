@@ -194,9 +194,8 @@ switch (c) {
         break;
     
     case 'e': //e) Decrypt Substitution with key provided
-    
         printf("Eneter substitution key (Eg QWERTYUIOPASDFGHJKLZXCVBNM):");
-        scanf("%s", subkey); //store entered key in subkey
+        scanf("%s", subkey); //store entered key in subkey      
         
         while(fscanf(subdecryptf, "%[^\n]", str) != EOF){ //scan file until new line or EOF
             upperenstr(str); //convert to uppercase
